@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futuristic Disk Usage Dashboard</title>
+    <title> Disk Usage Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -96,7 +96,8 @@
     <div class="container mx-auto max-w-6xl relative">
         <!-- Header -->
         <header class="mb-12 text-center">
-            <h1 class="text-6xl font-extrabold mb-4 glow">Futuristic Disk Usage Dashboard</h1>
+            <h1 class="text-6xl font-extrabold mb-4 glow"> Disk Usage Dashboard</h1>
+            <p class="text-xl">Project: <span class="font-semibold text-blue-300">{{ $projectName }}</span></p>
             <p class="text-xl">Monitor and manage disk usage with a high-tech interface.</p>
         </header>
 

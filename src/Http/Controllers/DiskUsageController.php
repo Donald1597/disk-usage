@@ -11,22 +11,22 @@ class DiskUsageController extends Controller
 {
     public function index()
     {
-        $projectPath = base_path(); // Chemin du projet Laravel
+        $projectPath = base_path();
         $diskUsage = $this->getDirectorySize($projectPath);
 
-        // Conversion en Go et Mo pour l'utilisation du projet
+        $projectName = basename($projectPath);
+        $formattedProjectName = strtoupper(str_replace(['_', '-'], ' ', $projectName));
+
         if ($diskUsage < (1024 ** 3)) {
-            $totalSize = number_format($diskUsage / (1024 ** 2), 2) . ' MB'; // Convertit l'espace en Mo
+            $totalSize = number_format($diskUsage / (1024 ** 2), 2) . ' MB';
         } else {
-            $totalSize = number_format($diskUsage / (1024 ** 3), 2) . ' GB'; // Convertit l'espace en Go
+            $totalSize = number_format($diskUsage / (1024 ** 3), 2) . ' GB';
         }
 
-        // Informations sur l'espace disque du serveur
         $totalDiskSpace = disk_total_space('/');
         $freeDiskSpace = disk_free_space('/');
         $usedDiskSpace = $totalDiskSpace - $freeDiskSpace;
 
-        // Conversion en Go et Mo pour l'espace disque du serveur
         if ($totalDiskSpace < (1024 ** 3)) {
             $totalDiskSpaceFormatted = number_format($totalDiskSpace / (1024 ** 2), 2) . ' MB';
         } else {
@@ -49,6 +49,7 @@ class DiskUsageController extends Controller
 
 
         return view('disk-usage::index', [
+            'projectName' => $formattedProjectName,
             'totalSize' => $totalSize,
             'totalDiskSpace' => $totalDiskSpaceFormatted,
             'freeDiskSpace' => $freeDiskSpaceFormatted,
