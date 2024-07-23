@@ -1,16 +1,16 @@
 {
-    "name": "donald1597/disk-usage",
-    "description": "A package to display and manage disk usage.",
-    "type": "library",
-    "autoload": {
-        "psr-4": {
-            "Donald1597\\DiskUsage\\": "src/"
-        }
-    },
-    "require": {
-        "php": "^8.0"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "version": "1.0.0"
+  "name": "donald1597/disk-usage",
+  "description": "A package to display and manage disk usage.",
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Donald1597\\DiskUsage\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.0"
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "version": "1.0.0"
 }
