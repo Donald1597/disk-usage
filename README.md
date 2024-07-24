@@ -42,13 +42,44 @@ DISK_USAGE_THRESHOLD_ABSOLUTE=1048576
 DISK_USAGE_NOTIFICATION_EMAIL=user@example.com
 ```
 
-## Usage
-
-After installation, you can access the disk usage dashboard via the route: disk-usage
+5. Set Up Queues for Notifications
 
 ## Notification
 
 When disk usage exceeds the defined thresholds, an email notification will be sent to the address specified in DISK_USAGE_NOTIFICATION_EMAIL.
+
+To handle email notifications asynchronously, you need to configure Laravel queues. Follow these steps:
+
+Configure the Queue Driver
+
+In your .env file, set up the queue driver:
+
+```bash
+QUEUE_CONNECTION=database
+```
+
+You can also choose other queue drivers like redis or sqs depending on your setup.
+
+Create a Queue Table
+
+If you are using the database queue driver, create the necessary tables by running:
+
+```bash
+php artisan queue:table
+php artisan migrate
+```
+
+6. Run the Queue Worker
+
+Start the queue worker to process the queued jobs:
+
+```bash
+php artisan queue:work
+```
+
+## Usage
+
+After installation, you can access the disk usage dashboard via the route: disk-usage
 
 ## Uninstallation
 
