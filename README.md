@@ -28,9 +28,27 @@
    Donald1597\DiskUsage\Http\DiskUsageServiceProvider::class,
    ```
 
+3. Publishing the Configuration
+
+```php
+php artisan vendor:publish --provider="Donald1597\DiskUsage\Http\DiskUsageServiceProvider" --tag=config
+```
+
+4. Make sure to set these variables in your .env file: for example
+
+```bash
+DISK_USAGE_THRESHOLD_PERCENTAGE=1
+DISK_USAGE_THRESHOLD_ABSOLUTE=1048576
+DISK_USAGE_NOTIFICATION_EMAIL=user@example.com
+```
+
 ## Usage
 
 After installation, you can access the disk usage dashboard via the route: disk-usage
+
+## Notification
+
+When disk usage exceeds the defined thresholds, an email notification will be sent to the address specified in DISK_USAGE_NOTIFICATION_EMAIL.
 
 ## Uninstallation
 

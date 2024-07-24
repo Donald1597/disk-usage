@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
+use Illuminate\Support\Facades\Mail;
+use Donald1597\DiskUsage\Mail\DiskUsageAlert;
 
 class DiskUsageController extends Controller
 {
@@ -47,6 +49,8 @@ class DiskUsageController extends Controller
 
         $directoryDetails = $this->getDirectoryDetails($projectPath);
 
+        $this->checkQuotaThreshold($usedDiskSpace, $totalDiskSpace);
+
 
         return view('disk-usage::index', [
             'projectName' => $formattedProjectName,
@@ -59,6 +63,19 @@ class DiskUsageController extends Controller
             'usedDiskSpaceBytes' => $usedDiskSpace,
             'usedProjectDiskSpaceBytes' => $diskUsage,
         ]);
+    }
+
+    private function checkQuotaThreshold($usedDiskSpace, $totalDiskSpace)
+    {
+        $percentageThreshold = config('disk-usage.quota_threshold.percentage');
+        $absoluteThreshold = config('disk-usage.quota_threshold.absolute');
+
+        $usedPercentage = ($usedDiskSpace / $totalDiskSpace) * 100;
+
+        if ($usedPercentage >= $percentageThreshold || $usedDiskSpace >= $absoluteThreshold) {
+            $notificationEmail = config('disk-usage.quota_threshold.notification_email');
+            Mail::to($notificationEmail)->send(new DiskUsageAlert($usedPercentage, $usedDiskSpace));
+        }
     }
 
     private function getDirectorySize($directory)

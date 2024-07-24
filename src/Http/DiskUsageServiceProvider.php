@@ -8,7 +8,11 @@ class DiskUsageServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        // Register bindings if needed
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/disk-usage.php' => config_path('disk-usage.php'),
+            ], 'config');
+        }
     }
 
     public function boot()
@@ -18,5 +22,9 @@ class DiskUsageServiceProvider extends ServiceProvider
 
         // Load views
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'disk-usage');
+
+        $this->publishes([
+            __DIR__ . '/../config/disk-usage.php' => config_path('disk-usage.php'),
+        ]);
     }
 }
