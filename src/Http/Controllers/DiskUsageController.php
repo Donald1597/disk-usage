@@ -62,6 +62,7 @@ class DiskUsageController extends Controller
             'freeDiskSpaceBytes' => $freeDiskSpace,
             'usedDiskSpaceBytes' => $usedDiskSpace,
             'usedProjectDiskSpaceBytes' => $diskUsage,
+            'totalDiskSpaceBytes' => $totalDiskSpace,
         ]);
     }
 
@@ -71,10 +72,12 @@ class DiskUsageController extends Controller
         $absoluteThreshold = config('disk-usage.quota_threshold.absolute');
 
         $usedPercentage = ($usedDiskSpace / $totalDiskSpace) * 100;
+        $usedDiskSpaceGB = number_format($usedDiskSpace / (1024 ** 3), 2);
+
 
         if ($usedPercentage >= $percentageThreshold || $usedDiskSpace >= $absoluteThreshold) {
             $notificationEmail = config('disk-usage.quota_threshold.notification_email');
-            Mail::to($notificationEmail)->send(new DiskUsageAlert($usedPercentage, $usedDiskSpace));
+            Mail::to($notificationEmail)->send(new DiskUsageAlert($usedPercentage, $usedDiskSpaceGB));
         }
     }
 

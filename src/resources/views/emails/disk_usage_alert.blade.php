@@ -136,7 +136,8 @@
                                                 style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                                 <div
                                                     style="font-family:Arial;font-size:13px;line-height:1;text-align:left;color:#333333;">
-                                                    <strong>Used Disk Space:</strong> {{ $usedDiskSpace }}</div>
+                                                    <strong>Used Disk Space:</strong> {{ $usedDiskSpace }} GB
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
@@ -144,7 +145,8 @@
                                                 style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                                 <div
                                                     style="font-family:Arial;font-size:13px;line-height:1;text-align:left;color:#333333;">
-                                                    <strong>Used Percentage:</strong> {{ $usedPercentage }}%</div>
+                                                    <strong>Used Percentage:</strong> {{ $usedPercentage }}%
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
